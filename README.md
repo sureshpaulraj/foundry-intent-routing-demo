@@ -4,7 +4,7 @@ This is a **synthetic** demonstration of routing natural-language queries to a g
 
 Microsoft-Decision-1 makes a typed `choice` decision through the Foundry `/providers/microsoft/v1/systemone` endpoint. If confident enough, the LLM branch uses GPT-4.1 mini with only the included fictional examples as context. The deterministic branch answers only exact synthetic matches and performs no transactions. Neither model generates a decision rationale; the displayed reason is the static description of the selected category. This is a demo, not a calibrated production classifier.
 
-Foundry IQ is **not connected**: the bounded synthetic dataset does not need a search index. To use a real knowledge base, connect an authorized source to Foundry IQ, enforce source permissions, and replace the prompt context. Do not commit private knowledge content to this repo.
+Foundry IQ is **not connected**: the bounded synthetic dataset does not need a search index. To use a real knowledge base, connect an authorized source to Foundry IQ, enforce source permissions, and replace the prompt context.
 
 ## Deployment
 
