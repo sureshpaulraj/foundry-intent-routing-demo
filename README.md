@@ -22,3 +22,32 @@ Tenants with user consent disabled require an Entra administrator to grant conse
 Run local tests with `python -m unittest discover -s tests -v` after installing `requirements.txt` in a virtual environment. To retire the demo, remove the app safely and run `terraform destroy` from `infra/`; verify the plan before confirming deletion.
 
 For a private runtime smoke test, run `az containerapp exec --name <app-name> --resource-group <group> --command "python smoke.py"` after deployment. It exercises both model-backed routes with only fictional inputs.
+
+## Troubleshooting
+
+Start with the symptom, then check the app and the relevant identity or model. Use the resource names and app ID from **your own** Terraform outputs and Entra app registration; do not put tenant IDs, secrets, Terraform state, or private documents in an issue.
+
+| Symptom | Check and resolution |
+| --- | --- |
+| **"Need admin approval" at sign-in** | The checkmark beside a greyed-out **Grant admin consent** button is an icon, **not** proof of consent. In **Entra ID > App registrations > this app > API permissions**, the **Status** column must say **Granted for \<tenant\>** for `openid`, `profile`, and `email`. A tenant administrator must grant consent if tenant policy blocks user consent; subscription Owner access does not suffice. Keep the app's assigned-user restriction in place. |
+| **401 at `/.auth/login/aad/callback`** | First resolve any admin-consent prompt, then retry in an InPrivate window with the user assigned to the Enterprise application. Confirm the app registration's web redirect URI exactly matches `https://<app-host>/.auth/login/aad/callback`, **ID token issuance** is enabled (the auth flow requests `code+id_token`), and Container Apps auth references the correct client secret. Do not publish or paste the secret. |
+| **401 on a command-line request to `/`** | This can be the expected response for a client that does not follow interactive sign-in. Open the URL in a browser; unauthenticated access must lead to Microsoft sign-in, **not** the demo UI. If it instead exposes the UI, disable public ingress until auth is fixed. |
+| **403 after a successful sign-in** | Verify the user's object ID is assigned to the Enterprise application and matches the Container Apps auth `allowedPrincipals.identities` list. Sign in to the configured tenant, not a different cached account. |
+| **Decision API 401/403** | Use the Foundry `https://<resource>.services.ai.azure.com/providers/microsoft/v1/systemone` endpoint, not the `.cognitiveservices.azure.com` endpoint. The caller's managed identity needs the `Microsoft.CognitiveServices/accounts/AIServices/providers/action` data action; the OpenAI User role alone does not include it. Allow time for a new role assignment to propagate. |
+| **Model call 429** | Check the relevant deployment quota and rate limit. The Decision-1 and generative models have separate capacities in Terraform; adjust `sku.capacity` within available quota and reapply. Keep the error visible rather than inventing an answer. |
+| **App unavailable, image pull error, or 502/503** | Check the ready revision, container and system logs, registry image tag, and the pull identity's `AcrPull` assignment. Ensure the container listens on port 8000. Scale-to-zero can cause a cold start; investigate logs before changing replica settings. |
+| **Terraform 409 on Foundry resources** | Another operation on the same Foundry account may still be running. Wait for it to finish and re-run `terraform plan`/`terraform apply`; the model and project resources are deliberately sequenced. |
+| **Model deployment name rejected** | Azure can reject reserved words in the *deployment name*. Use a neutral deployment name such as `intent-decision` while keeping the underlying model name `Microsoft-Decision-1`. |
+| **App Service F1/B1 quota is zero** | This project uses a Container Apps consumption environment instead of an App Service plan. Do not switch hosts without checking regional quota and authentication behavior. |
+
+Useful read-only checks (run in the target subscription):
+
+```powershell
+az ad app permission list-grants --id <app-client-id> -o json
+az containerapp show --name <app-name> --resource-group <resource-group> --query "{status:properties.runningStatus,revision:properties.latestReadyRevisionName,ingress:properties.configuration.ingress}" -o json
+az containerapp revision list --name <app-name> --resource-group <resource-group> -o table
+az containerapp logs show --name <app-name> --resource-group <resource-group> --tail 50
+az containerapp logs show --name <app-name> --resource-group <resource-group> --type system --tail 50
+```
+
+An empty grant list means no consent grant is visible to this query. If the portal still blocks sign-in after an administrator grants consent, inspect **Entra ID > Sign-in logs** for the specific error code and timestamp, then re-check the registration and allowed identity; do not remove authentication to bypass the error.
