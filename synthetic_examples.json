@@ -1,0 +1,18 @@
+[
+  {"route":"llm","category":"semantic_faq","query":"When should I use an LLM instead of a lookup?","response":"Use an LLM for synthesis, ambiguous language, or explanation. Use a lookup for exact stored values."},
+  {"route":"llm","category":"summarize","query":"Summarize these fictional customer feedback notes.","response":"The fictional notes highlight onboarding friction, unclear pricing, and interest in guided setup."},
+  {"route":"llm","category":"rewrite","query":"Rewrite this fictional FAQ answer for an executive audience.","response":"Frame the response around business impact, risk, and the decision required."},
+  {"route":"llm","category":"reason","query":"Compare a semantic FAQ question with a status lookup.","response":"A semantic FAQ question needs interpretation; a status lookup needs an authoritative system value."},
+  {"route":"llm","category":"rewrite","query":"Translate the fictional onboarding advice into Spanish.","response":"Translation changes language while preserving meaning; it belongs on the generative path."},
+  {"route":"llm","category":"reason","query":"Explain why an ambiguous support question needs clarification.","response":"Without a clear account, timeframe, or objective, choosing a tool or answer risks misleading the user."},
+  {"route":"llm","category":"summarize","query":"Create a short narrative from these fictional category totals.","response":"Exact requests dominate the fictional sample, while open-ended tasks benefit from synthesis."},
+  {"route":"llm","category":"semantic_faq","query":"Find guidance most similar to avoiding AI for simple checks.","response":"Use deterministic code for exact calculations, checks, and recorded facts; reserve LLMs for interpretation."},
+  {"route":"non_llm","category":"exact_lookup","query":"What is the status of case DEMO-104?","response":"Synthetic case DEMO-104 is Open."},
+  {"route":"non_llm","category":"calculation","query":"Calculate 18 percent of 2450.","response":"441"},
+  {"route":"non_llm","category":"validation","query":"Is hello@example.invalid a valid email format?","response":"Yes, it has the shape of an email address; this does not verify delivery."},
+  {"route":"non_llm","category":"transaction","query":"Create a fictional support case.","response":"This demonstration never executes transactions; connect an authorized workflow to create a case."},
+  {"route":"non_llm","category":"exact_lookup","query":"What is the answer stored under DEMO-FAQ-7?","response":"Synthetic FAQ DEMO-FAQ-7 says exact record retrieval uses a deterministic lookup."},
+  {"route":"non_llm","category":"calculation","query":"Convert 2026-10-11T19:12:24-07:00 to UTC.","response":"2026-10-12T02:12:24Z"},
+  {"route":"non_llm","category":"validation","query":"Redact the email in 'Write to alex@example.invalid'.","response":"Write to [REDACTED_EMAIL]"},
+  {"route":"non_llm","category":"exact_lookup","query":"What is the configured demo threshold?","response":"The synthetic decision threshold is 0.65."}
+]
