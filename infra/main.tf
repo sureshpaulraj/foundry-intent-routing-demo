@@ -161,6 +161,21 @@ resource "azuread_application" "demo" {
   display_name     = "Foundry Intent Router Demo ${var.name_suffix}"
   sign_in_audience = "AzureADMyOrg"
   owners           = [data.azuread_client_config.current.object_id]
+  required_resource_access {
+    resource_app_id = "00000003-0000-0000-c000-000000000000"
+    resource_access {
+      id   = "37f7f235-527c-4136-accd-4a02d197296e"
+      type = "Scope"
+    }
+    resource_access {
+      id   = "14dad69e-099b-42c9-810b-d002981feec1"
+      type = "Scope"
+    }
+    resource_access {
+      id   = "64a6cdd6-aab1-4aaf-94b8-3cc8405e90d0"
+      type = "Scope"
+    }
+  }
   web {
     redirect_uris = ["https://ca-intent-demo-${var.name_suffix}.${azurerm_container_app_environment.demo.default_domain}/.auth/login/aad/callback"]
     implicit_grant {

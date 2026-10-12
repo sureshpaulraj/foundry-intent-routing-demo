@@ -17,6 +17,8 @@ Prerequisites: Azure CLI signed into your target tenant/subscription, Terraform 
 
 `local.auto.tfvars`, Terraform state/plan files, and build artifacts must never be committed: state contains an Entra client secret. Keep the local state protected. The demo uses a one-replica maximum and a 0.65 **illustrative** abstention threshold; calibrate it on representative labeled examples for production.
 
+Tenants with user consent disabled require an Entra administrator to grant consent to this app's three sign-in-only OpenID scopes (`openid`, `profile`, `email`) before the assigned user can sign in. No Microsoft Graph data permissions are requested. The administrator can use the app registration's **API permissions > Grant admin consent** action; Azure subscription Owner rights alone do not grant Entra administrator consent.
+
 Run local tests with `python -m unittest discover -s tests -v` after installing `requirements.txt` in a virtual environment. To retire the demo, remove the app safely and run `terraform destroy` from `infra/`; verify the plan before confirming deletion.
 
 For a private runtime smoke test, run `az containerapp exec --name <app-name> --resource-group <group> --command "python smoke.py"` after deployment. It exercises both model-backed routes with only fictional inputs.
