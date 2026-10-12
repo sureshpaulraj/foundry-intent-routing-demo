@@ -163,6 +163,9 @@ resource "azuread_application" "demo" {
   owners           = [data.azuread_client_config.current.object_id]
   web {
     redirect_uris = ["https://ca-intent-demo-${var.name_suffix}.${azurerm_container_app_environment.demo.default_domain}/.auth/login/aad/callback"]
+    implicit_grant {
+      id_token_issuance_enabled = true
+    }
   }
 }
 
