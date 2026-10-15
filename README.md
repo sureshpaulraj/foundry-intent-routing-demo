@@ -14,6 +14,8 @@ Open these editable diagrams in the [Microsoft Excalidraw instance](https://aka.
 - [Runtime data flow](diagrams/data-flow.excalidraw): query validation, typed decision, confidence gate, and LLM/non-LLM/clarification responses.
 - [Software components](diagrams/components.excalidraw): UI, Flask handlers, fictional records, and model dependencies.
 
+Animated GIF previews: [architecture](diagrams/architecture.gif), [data flow](diagrams/data-flow.gif), and [components](diagrams/components.gif). Regenerate them with `python scripts/render_gifs.py` (requires Pillow).
+
 ## Deployment
 
 Prerequisites: Azure CLI signed into your target tenant/subscription, Terraform >= 1.6, permission to create Foundry resources and Entra app registrations, and Azure CLI `containerapp` support. Resource creation, registry storage/builds, and model calls can incur charges.
