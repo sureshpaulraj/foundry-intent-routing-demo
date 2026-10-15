@@ -6,6 +6,14 @@ Microsoft-Decision-1 makes a typed `choice` decision through the Foundry `/provi
 
 Foundry IQ is **not connected**: the bounded synthetic dataset does not need a search index. To use a real knowledge base, connect an authorized source to Foundry IQ, enforce source permissions, and replace the prompt context.
 
+## Diagrams
+
+Open these editable diagrams in the [Microsoft Excalidraw instance](https://aka.ms/excalidraw):
+
+- [Deployment architecture](diagrams/architecture.excalidraw): Entra sign-in boundary, Container App, registry, managed identities, and Foundry models.
+- [Runtime data flow](diagrams/data-flow.excalidraw): query validation, typed decision, confidence gate, and LLM/non-LLM/clarification responses.
+- [Software components](diagrams/components.excalidraw): UI, Flask handlers, fictional records, and model dependencies.
+
 ## Deployment
 
 Prerequisites: Azure CLI signed into your target tenant/subscription, Terraform >= 1.6, permission to create Foundry resources and Entra app registrations, and Azure CLI `containerapp` support. Resource creation, registry storage/builds, and model calls can incur charges.

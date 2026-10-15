@@ -1,0 +1,30 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://github.com/sureshpaulraj/foundry-intent-routing-demo",
+  "elements": [
+    {"id":"d-title","type":"text","x":40,"y":20,"width":1100,"height":70,"text":"Runtime data flow | one user query","fontSize":28,"fontFamily":2,"strokeColor":"#000000","textAlign":"left","verticalAlign":"top"},
+    {"id":"d-user","type":"rectangle","x":50,"y":180,"width":210,"height":110,"strokeColor":"#0078D4","backgroundColor":"#CFE4FA","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-user-t","type":"text","x":65,"y":199,"width":180,"height":75,"text":"Authenticated browser\nquery <= 500 chars","fontSize":17,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-api","type":"rectangle","x":350,"y":180,"width":250,"height":110,"strokeColor":"#0078D4","backgroundColor":"#CFE4FA","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-api-t","type":"text","x":365,"y":198,"width":220,"height":78,"text":"Flask /api/route\nvalidate request","fontSize":18,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-model","type":"rectangle","x":690,"y":180,"width":290,"height":110,"strokeColor":"#107C10","backgroundColor":"#DFF6DD","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-model-t","type":"text","x":708,"y":196,"width":254,"height":80,"text":"Microsoft-Decision-1\nchoice + confidence","fontSize":18,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-branch","type":"diamond","x":1090,"y":170,"width":200,"height":140,"strokeColor":"#F7630C","backgroundColor":"#FFF4CE","fillStyle":"solid","strokeWidth":2},
+    {"id":"d-branch-t","type":"text","x":1134,"y":209,"width":112,"height":65,"text":"confidence\n>= 0.65?","fontSize":16,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-clarify","type":"rectangle","x":1380,"y":65,"width":245,"height":105,"strokeColor":"#F7630C","backgroundColor":"#FFF4CE","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-clarify-t","type":"text","x":1392,"y":82,"width":221,"height":75,"text":"Low confidence / clarify\nask for detail","fontSize":17,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-llm","type":"rectangle","x":1380,"y":230,"width":245,"height":120,"strokeColor":"#107C10","backgroundColor":"#DFF6DD","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-llm-t","type":"text","x":1392,"y":247,"width":221,"height":90,"text":"LLM category\nGPT-4.1 mini + fictional\nexample context","fontSize":17,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-exact","type":"rectangle","x":1380,"y":410,"width":245,"height":120,"strokeColor":"#495057","backgroundColor":"#dee2e6","fillStyle":"solid","strokeWidth":2,"roundness":{"type":3}},
+    {"id":"d-exact-t","type":"text","x":1392,"y":427,"width":221,"height":90,"text":"Non-LLM category\ncase-insensitive exact match\nsynthetic_examples.json","fontSize":16,"fontFamily":2,"strokeColor":"#000000","textAlign":"center","verticalAlign":"middle"},
+    {"id":"d-note","type":"text","x":50,"y":590,"width":1490,"height":120,"text":"All three paths return JSON to the browser. Unknown exact queries do not invent records; upstream failures return an error.\nThe static category description is shown as the routing reason; Microsoft-Decision-1 does not generate prose rationales.","fontSize":17,"fontFamily":2,"strokeColor":"#000000","textAlign":"left","verticalAlign":"top"},
+    {"id":"d-e1","type":"arrow","x":260,"y":235,"width":90,"height":0,"strokeColor":"#0078D4","strokeWidth":2,"points":[[0,0],[90,0]]},
+    {"id":"d-e2","type":"arrow","x":600,"y":235,"width":90,"height":0,"strokeColor":"#107C10","strokeWidth":2,"points":[[0,0],[90,0]]},
+    {"id":"d-e3","type":"arrow","x":980,"y":235,"width":110,"height":0,"strokeColor":"#F7630C","strokeWidth":2,"points":[[0,0],[110,0]]},
+    {"id":"d-e4","type":"arrow","x":1290,"y":205,"width":90,"height":-88,"strokeColor":"#F7630C","strokeWidth":2,"points":[[0,0],[90,-88]]},
+    {"id":"d-e5","type":"arrow","x":1290,"y":242,"width":90,"height":47,"strokeColor":"#107C10","strokeWidth":2,"points":[[0,0],[90,47]]},
+    {"id":"d-e6","type":"arrow","x":1250,"y":300,"width":130,"height":170,"strokeColor":"#495057","strokeWidth":2,"points":[[0,0],[130,170]]}
+  ],
+  "appState": {"viewBackgroundColor":"#ffffff"}
+}
